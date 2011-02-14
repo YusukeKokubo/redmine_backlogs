@@ -164,6 +164,14 @@ See RB.Taskboard.initialize()
   display:none;
 }
 
+tr.closed{
+  background-color: #eeeeee;
+}
+
+td.closed{
+  background-color: #eeeeee;
+}
+
 /* item styles used by .task and .impediment */
 .issue, .placeholder{
   background-color:#CCCCCC;
