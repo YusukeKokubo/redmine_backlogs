@@ -1,0 +1,13 @@
+
+<%- content_for :main do %>
+  <% if @page and @content %>
+    <div class="contextual">
+      <%= link_to_if_authorized(l(:button_edit), {:controller=> 'wiki',:action => 'edit', :id => @page.title}, :class => 'icon icon-edit', :accesskey => accesskey(:edit)) if @content.version == @page.content.version %>
+      <%= link_to_if_authorized(l(:label_history), {:controller=> 'wiki',:action => 'history', :id => @page.title}, :class => 'icon icon-history') %>
+    </div>
+    <%= render(:partial => "wiki/content", :locals => {:content => @content}) %>
+    <%= link_to_attachments @page %>
+  <% else %>
+    <%= link_to_if_authorized(h('wiki'), {:controller => 'wiki', :action => 'show', :project_id => @project, :id => @project.wiki.start_page}) %>
+  <% end %>
+<%- end %>

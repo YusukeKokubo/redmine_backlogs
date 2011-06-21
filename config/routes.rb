@@ -16,6 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :rb, :only => :none do |rb|
     rb.resource   :updated_items,    :only => :show,                :controller => :rb_updated_items,   :as => "updated_items/:project_id"
     rb.resource   :wiki,             :only => [:show, :edit],       :controller => :rb_wikis,           :as => "wikis/:sprint_id"
+    rb.resource   :wiki,             :only => :show,                :controller => :rb_wiki,            :as => "wiki/:project_id"
     rb.resource   :task,             :except => :index,             :controller => :rb_tasks,           :as => "task/:id"
     rb.resources  :tasks,            :only => :index,               :controller => :rb_tasks,           :as => "tasks/:story_id"
     rb.resource   :taskboard,        :only => :show,                :controller => :rb_taskboards,      :as => "taskboards/:sprint_id"
@@ -185,6 +186,8 @@ else
           :to => 'rb_hooks_render#view_issues_sidebar'
   rb_match rb, 'hooks/sidebar/project/:project_id/:sprint_id',
           :to => 'rb_hooks_render#view_issues_sidebar'
+
+  rb_match rb, 'wiki/:project_id', :to => 'rb_wiki#show'
   end
 end
 

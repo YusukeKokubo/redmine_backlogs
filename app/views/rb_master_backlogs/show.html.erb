@@ -61,6 +61,10 @@
     <div id="top_sprint_backlogs_container">
       <div id="sprint_backlogs_container">
         <%= render :partial => 'backlog', :collection => @sprint_backlogs %>
+<% if @project.module_enabled? 'wiki' %>
+<iframe src="/rb/wiki/<%= @project.identifier %>" name="sample" width="580" height="600" style="border: 0;">
+</iframe> 
+<% end %>
       </div>
 	  <% if ! @settings[:disable_closed_sprints_to_master_backlogs] %>
 		  <!--script for collapsing closed backlog div-->
