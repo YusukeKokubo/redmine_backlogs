@@ -131,18 +131,29 @@ See RB.Taskboard.initialize()
   width:95%;
 }
 .story .subject{
-  height:63px;
+  height:43px;
   line-height:13px;
   margin-top:0;
   overflow:hidden;
   padding:2px;
   width:186px;
 }
+
 .story .project {
   text-align:left;
 }
 .story .id .v {
   display:none;
+}
+
+.story .status{
+  height:20px;
+  line-height:13px;
+  margin-top:0;
+  overflow:hidden;
+  padding:2px;
+  width:186px;
+  color: #666666;
 }
 .story.closed .subject{
   text-decoration:line-through;
