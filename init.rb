@@ -40,6 +40,7 @@ object_to_prepare.to_prepare do
 
   require_dependency 'backlogs_printable_cards'
 
+  require_dependency 'backlogs_issue_patch_ex'
   Redmine::AccessControl.permission(:manage_versions).actions << "rb_sprints/close_completed"
 end
 
