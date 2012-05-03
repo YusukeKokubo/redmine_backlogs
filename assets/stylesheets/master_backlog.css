@@ -303,7 +303,8 @@
   cursor:move;
   display:block;
   font-size:11px;
-  height:26px;
+  min-height:26px;
+  max-height:45px;
   margin:0;
   overflow:hidden;
   position:relative;
@@ -390,7 +391,7 @@
   float:left;
   width:32em;
   margin-right:2em;
-  white-space:nowrap;
+  /* white-space:nowrap; */
 }
 #backlogs_container .stories .story.closed .subject{
   text-decoration:line-through;
