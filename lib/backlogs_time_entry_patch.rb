@@ -46,17 +46,23 @@ module Backlogs
       before_save_without_block_invalid_spent_hour
 
       return true unless project.module_enabled?('backlogs')
-      if issue.tracker_id == Setting.plugin_redmine_backlogs[:task_tracker].to_i
-        return true unless issue.status.is_default?
-        errors.add_to_base("タスクのステータスが#{issue.status}のままになってるので入力できません＞＜")
-        return false
-      end
-      return true unless Setting.plugin_redmine_backlogs[:story_trackers].map{|t|t.to_i}.include?(issue.tracker_id)
 
-      if issue.children?
-        errors.add_to_base("ストーリには時間を入力できません。タスクにつけてください。")
+      if issue.status.is_default?
+        errors.add_to_base("ステータスが#{issue.status}のままになってるので入力できません＞＜")
         return false
       end
+
+      #if issue.tracker_id == Setting.plugin_redmine_backlogs[:task_tracker].to_i
+      #  return true unless issue.status.is_default?
+      #  errors.add_to_base("タスクのステータスが#{issue.status}のままになってるので入力できません＞＜")
+      #  return false
+      #end
+      #return true unless Setting.plugin_redmine_backlogs[:story_trackers].map{|t|t.to_i}.include?(issue.tracker_id)
+
+      #if issue.children?
+      #  errors.add_to_base("ストーリには時間を入力できません。タスクにつけてください。")
+      #  return false
+      #end
 
       true
     end
