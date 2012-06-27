@@ -214,4 +214,5 @@ ja:
   error_assignee_is_empty: "先生！担当者がいません！"
   error_require_note: "後から思い出せるように経緯を書いてください。却下するなら却下した理由がありますよね。"
 
+  invalid_issue_status: "ステータスが%{status}のままになってるので入力できません＞＜"
 

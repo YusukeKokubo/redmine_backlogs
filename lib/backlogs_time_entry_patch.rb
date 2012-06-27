@@ -7,15 +7,14 @@ module Backlogs
   def self.included(base)
     base.send(:include, InstanceMethods)
     base.class_eval do
-      alias_method_chain :after_create, :update4create_remaining_hours
-      alias_method_chain :after_update, :update4update_remaining_hours
-      alias_method_chain :before_save, :block_invalid_spent_hour
+      after_create :update4create_remaining_hours
+      after_update :update4update_remaining_hours
+      before_save :block_invalid_spent_hour
     end
   end
   
   module InstanceMethods
-    def after_create_with_update4create_remaining_hours
-      after_create_without_update4create_remaining_hours
+    def update4create_remaining_hours
       return if issue.status.is_closed?
       return unless issue.tracker_id == Setting.plugin_redmine_backlogs[:task_tracker].to_i
       return unless project.module_enabled?('backlogs')
@@ -24,8 +23,7 @@ module Backlogs
       update_remaining_hours(note, hours)
     end
 
-    def after_update_with_update4update_remaining_hours
-      after_update_without_update4update_remaining_hours
+    def update4update_remaining_hours
       return if issue.status.is_closed?
       return unless issue.tracker_id == Setting.plugin_redmine_backlogs[:task_tracker].to_i
       return unless project.module_enabled?('backlogs')
@@ -42,13 +40,11 @@ module Backlogs
       issue.save
     end
 
-    def before_save_with_block_invalid_spent_hour
-      before_save_without_block_invalid_spent_hour
-
+    def block_invalid_spent_hour
       return true unless project.module_enabled?('backlogs')
 
       if issue.status.is_default?
-        errors.add_to_base("ステータスが#{issue.status}のままになってるので入力できません＞＜")
+        errors[:base] << l(:invalid_issue_status, :status => issue.status.name)
         return false
       end
 
