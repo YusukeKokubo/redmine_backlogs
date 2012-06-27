@@ -1,0 +1,20 @@
+<%- content_for :main do %>
+  <div class="contextual">
+  <%= link_to(l(:label_news_new),
+              new_project_news_path(@project),
+              :class => 'icon icon-add',
+              :target => '_blank',
+              :onclick => 'Element.show("add-news"); Form.Element.focus("news_title"); return false;') if @project && User.current.allowed_to?(:manage_news, @project) %>
+  </div>
+  <% if @news.any? && authorize_for('news', 'index') %>
+  <div class="news box">
+    <h3><%=l(:label_news_latest)%></h3>  
+    <ul>
+      <% @news.each do |new| %>
+        <li><%= link_to h(new.title), news_path(new) %>(<%= time_tag(new.created_on) %><%= l(:label_previous) %>)</li>
+      <% end %>
+    </ul>
+    <p><%= link_to l(:label_news_view_all), :controller => 'news', :action => 'index', :project_id => @project %></p>
+  </div>  
+  <% end %>
+<%- end %>

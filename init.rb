@@ -101,7 +101,8 @@ Redmine::Plugin.register :redmine_backlogs do
                                         :rb_burndown_charts  => [:embedded, :show, :print],
                                         :rb_updated_items    => :show,
                                        :rb_wiki             => :show,
-                                       :rb_activity         => :show
+                                       :rb_activity         => :show,
+                                       :rb_news             => :show,
                                       }
 
     # Release permissions
