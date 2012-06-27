@@ -48,7 +48,7 @@ group :development do
     gem "rspec-rails", "=1.3.3"
   end
   if RUBY_VERSION >= "1.9"
-    gem "simplecov", "~>0.6"
+    gem "simplecov"
   else
     gem "rcov",  "=0.9.11"
   end
