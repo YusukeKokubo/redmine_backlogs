@@ -103,9 +103,11 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
     var data = "prev=" + (prev.length==1 ? this.$.prev().data('this').getID() : '') +
                "&fixed_version_id=" + sprint_id;
     
+    var status_id = "";
     j.find('.editor').each(function() {
         var value = jQuery(this).val();  
         data += "&" + this.name + '=' + encodeURIComponent(value);
+        if (this.name == "status_id") status_id = encodeURIComponent(value);
     });    
     
     if( this.isNew() ){
@@ -113,6 +115,15 @@ RB.Story = RB.Object.create(RB.Issue, RB.EditableInplace, {
     } else {
       var url = RB.urlFor( 'update_story', { id: this.getID() } );
       data += "&_method=put"
+      if (status_id == "4" || status_id == "6") {
+        var note = window.prompt("理由を書いてください.");
+        if (note == null) {
+          this.markError();
+          self.endEdit();
+          return;
+        }
+        data += "&notes=" + note;
+      }
     }
     
     return {

@@ -31,16 +31,16 @@ module Backlogs
         CustomField.find(:all, :conditions => "type = '#{klass.name}CustomField'", :order => 'position')
       end
 
-      def journalized_update_attributes!(attribs)
-        self.init_journal(User.current)
+      def journalized_update_attributes!(attribs, note="")
+        self.init_journal(User.current, note)
         return self.update_attributes!(attribs)
       end
-      def journalized_update_attributes(attribs)
-        self.init_journal(User.current)
+      def journalized_update_attributes(attribs, note="")
+        self.init_journal(User.current, note)
         return self.update_attributes(attribs)
       end
-      def journalized_update_attribute(attrib, v)
-        self.init_journal(User.current)
+      def journalized_update_attribute(attrib, v, note="")
+        self.init_journal(User.current, note)
         return self.update_attribute(attrib, v)
       end
     end

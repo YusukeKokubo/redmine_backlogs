@@ -90,7 +90,7 @@ class RbTask < Issue
                           end
 
     begin
-    if valid_relationships && result = self.journalized_update_attributes!(attribs)
+    if valid_relationships && result = self.journalized_update_attributes!(attribs, params[:note])
       move_before params[:next] unless is_impediment # impediments are not hosted under a single parent, so you can't tree-order them
       update_blocked_list params[:blocks].split(/\D+/) if params[:blocks]
 

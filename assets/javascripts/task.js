@@ -80,6 +80,16 @@ RB.Task = RB.Object.create(RB.Issue, {
     } else {
       var url = RB.urlFor( 'update_task', { id: this.getID() } );
       data += "&_method=put"
+
+      if (cellID[1] == "4" || cellID[1] == "6") {
+        var note = window.prompt("理由を書いてください.");
+        if (note == null) {
+          this.markError();
+          self.endEdit();
+          return;
+        }
+        data += "&note=" + note;
+      }
     }
     
     return {
